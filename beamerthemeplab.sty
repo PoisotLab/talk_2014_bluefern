@@ -1,0 +1,50 @@
+\mode<presentation>
+
+% No navigation
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+% Margins
+\setbeamersize{text margin left=5pt,text margin right=5pt}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{arrows,positioning}
+\usepackage{pgfplots}
+\usepgfplotslibrary{ternary,groupplots}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{shadowtext}
+\usepackage{textcase}
+
+% Fonts
+\setbeamerfont{title}{size=\large, series=\bfseries, family=\sffamily,shape=\upshape}
+\setbeamerfont{author}{size=\small, series=\mdseries, family=\sffamily,shape=\upshape}
+\setbeamerfont{date}{size=\tiny, series=\mdseries, family=\sffamily, shape=\upshape}
+
+% Templates
+\setbeamertemplate{title page}{%
+   \vfill
+   \vfill
+   \vfill
+   \vfill
+   \vfill
+   \begin{beamercolorbox}[left, leftskip=.1\textwidth]{title}
+      {\color{plBg!85!black}\usebeamerfont{date}\MakeUppercase{\insertdate}}\\
+      {\color{plBg}\usebeamerfont{title}\inserttitle}\vskip 1em
+      {\color{plBg!90!black}\usebeamerfont{author}\insertauthor}%
+   \end{beamercolorbox}
+}
+
+% Background image
+\pgfdeclareimage[width=1.1\paperwidth,height=1.1\paperheight]{bg}{bg}
+
+\setbeamertemplate{background canvas}{%
+   \ifnum\c@framenumber=1%
+      \pgfuseimage{bg}
+   \else%
+   \fi%
+}
+
+\mode<all>
