@@ -8,6 +8,8 @@
 \usecolortheme{plab}
 \usetheme{plab}
 
+\pdfpageattr{/Group <</S /Transparency /I true /CS /DeviceRGB>>} 
+
 % Convex path
 \newcommand{\convexpath}[2]{
   [   
@@ -43,17 +45,20 @@
 \tikzstyle{every picture}+=[remember picture]
 \everymath{\displaystyle}
 
+\begingroup
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{bg}}
 \maketitle
+\endgroup
 
 \begin{frame} % WTF are networks
    \centering
    \begin{tikzpicture}[auto,
          sp/.style={draw, very thick, minimum size=1.3cm, color=plFg, circle, inner sep=1pt, outer sep=0pt, fill=plBg},
          ssp/.style={draw, very thick, minimum size=1.0cm, color=plYellow, circle, inner sep=1pt, outer sep=0pt, fill=plBg},
-         int/.style={draw, shorten >= 2pt, shorten <= 2pt, ->, >=latex', thick},
+         int/.style={draw, shorten >= 2pt, shorten <= 2pt, ->, >=latex', very thick},
          sint/.style={draw, shorten >= 2pt, shorten <= 2pt, ->, >=latex', thick}
       ]
-      \node[sp] at (0,0) (trex) {\includegraphics[width=1.2cm]{images/trex.png}};
+      \node[sp] at (0,0) (trex) {\includegraphics[width=1.0cm]{images/trex.png}};
       \node[sp, below=0.8cm of trex] (wolf) {\includegraphics[width=0.8cm]{images/wolf.png}};
       \node[sp, below=0.8cm of wolf] (deer) {\includegraphics[width=0.8cm]{images/deer.png}};
       \node[sp, below right=0.8cm and 0.8cm of deer] (fern) {\includegraphics[width=0.8cm]{images/fern.png}};
@@ -86,7 +91,7 @@
       \draw[sint] (w4) -- (a4);
    
       \begin{pgfonlayer}{background}
-         \uncover<2>{\draw[fill=plFg!30!plBg,draw=none] \convexpath{wasp, w1, w4, a4, a1, apis}{0.8cm};}
+         \uncover<2>{\draw[fill=plFg, fill opacity=0.1, draw=none] \convexpath{wasp, w1, w4, a4, a1, apis}{0.8cm};}
       \end{pgfonlayer}
 
       }
@@ -98,8 +103,8 @@
 \begin{frame} % Question
    \centering
    \begin{tikzpicture}[node distance=1.5cm, auto,
-      tp/.style={draw, circle, thick, minimum size=0.8cm, color=plGreen},
-      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta},
+      tp/.style={draw, circle, very thick, minimum size=0.8cm, color=plGreen, fill=plGreen, fill opacity=0.2},
+      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta, fill=plMagenta, fill opacity=0.2},
       flow/.style={->, very thick, >=latex'},
       ]
       % First network
@@ -140,8 +145,8 @@
 \begin{frame} % Explanation of the model
    \centering
    \begin{tikzpicture}[node distance=1.5cm, auto,
-      tp/.style={draw, circle, thick, minimum size=0.8cm, color=plGreen},
-      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta},
+      tp/.style={draw, circle, very thick, minimum size=0.8cm, color=plGreen, fill=plGreen, fill opacity=0.2},
+      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta, fill=plMagenta, fill opacity=0.2},
       net/.style={circle, minimum size=0.5cm},
       flow/.style={->, very thick, >=latex'},
       meta/.style={->, thick, >=latex', plFg!50},
@@ -207,8 +212,8 @@
 \begin{frame} % Different network metrics
    \centering
    \begin{tikzpicture}[node distance=1.7cm, auto,
-      tp/.style={draw, circle, thick, minimum size=0.8cm, color=plGreen},
-      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta},
+      tp/.style={draw, circle, very thick, minimum size=0.8cm, color=plGreen, fill=plGreen, fill opacity=0.2},
+      bt/.style={draw, circle, thick, minimum size=0.8cm, color=plMagenta, fill=plMagenta, fill opacity=0.2},
       flow/.style={->, very thick, >=latex'},
       ]
       \node[tp] (t1) {};
@@ -286,8 +291,8 @@
 \begin{frame} % Model analysis
    \centering
    \begin{tikzpicture}[trim axis left, trim axis right,
-      nd/.style={draw, circle, color=plCyan, very thick, minimum size=0.3cm},
-      tn/.style={color=plCyan, very thick}
+      nd/.style={draw, circle, color=plFg, very thick, minimum size=0.3cm},
+      tn/.style={color=plFg, very thick}
       ]
       \begin{axis}[
             tick align=outside,

@@ -17,6 +17,7 @@
 \usepackage{graphicx}
 \usepackage{shadowtext}
 \usepackage{textcase}
+\usepackage{bera,beramono,berasans}
 
 % Fonts
 \setbeamerfont{title}{size=\large, series=\bfseries, family=\sffamily,shape=\upshape}
@@ -24,7 +25,6 @@
 \setbeamerfont{date}{size=\tiny, series=\mdseries, family=\sffamily, shape=\upshape}
 
 % Templates
-
 \setbeamertemplate{title page}{%
    \vfill
    \vfill
@@ -32,19 +32,10 @@
    \vfill
    \vfill
    \begin{beamercolorbox}[left, leftskip=.1\textwidth]{title}
-      {\color{plBg!85!black}\usebeamerfont{date}\MakeUppercase{\insertdate}}\\
-      {\color{plBg}\usebeamerfont{title}\inserttitle}\vskip 1em
-      {\color{plBg!90!black}\usebeamerfont{author}\insertauthor}%
+      {\color{plFg!85!plBg}\usebeamerfont{date}\MakeUppercase{\insertdate}}\\
+      {\color{plFg}\usebeamerfont{title}\inserttitle}\vskip 1em
+      {\color{plFg!90!plBg}\usebeamerfont{author}\insertauthor}%
    \end{beamercolorbox}
 }
-
-
-% Background image
-\pgfdeclareimage[width=1.1\paperwidth,height=1.1\paperheight]{bg}{bg}
-\ifnum\c@framenumber=1%
-   \setbeamertemplate{background canvas}{\pgfuseimage{bg}}%
-\else%
-   \setbeamertemplate{background canvas}[vertical shading][top=plBg,bottom=plBg]%
-\fi%
 
 \mode<all>
