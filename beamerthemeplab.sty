@@ -10,7 +10,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
-\usetikzlibrary{arrows,positioning}
+\usetikzlibrary{arrows,positioning,shapes,shadows,backgrounds}
 \usepackage{pgfplots}
 \usepgfplotslibrary{ternary,groupplots}
 \usepackage{amsmath}
@@ -24,6 +24,7 @@
 \setbeamerfont{date}{size=\tiny, series=\mdseries, family=\sffamily, shape=\upshape}
 
 % Templates
+
 \setbeamertemplate{title page}{%
    \vfill
    \vfill
@@ -37,14 +38,13 @@
    \end{beamercolorbox}
 }
 
+
 % Background image
 \pgfdeclareimage[width=1.1\paperwidth,height=1.1\paperheight]{bg}{bg}
-
-\setbeamertemplate{background canvas}{%
-   \ifnum\c@framenumber=1%
-      \pgfuseimage{bg}
-   \else%
-   \fi%
-}
+\ifnum\c@framenumber=1%
+   \setbeamertemplate{background canvas}{\pgfuseimage{bg}}%
+\else%
+   \setbeamertemplate{background canvas}[vertical shading][top=plBg,bottom=plBg]%
+\fi%
 
 \mode<all>

@@ -8,16 +8,92 @@
 \usecolortheme{plab}
 \usetheme{plab}
 
-\usepackage{tikz}
-\usetikzlibrary{arrows,positioning}
-\usepackage{pgfplots}
-\usepackage{amsmath}
+% Convex path
+\newcommand{\convexpath}[2]{
+  [   
+  create hullcoords/.code={
+    \global\edef\namelist{#1}
+    \foreach [count=\counter] \nodename in \namelist {
+      \global\edef\numberofnodes{\counter}
+      \coordinate (hullcoord\counter) at (\nodename);
+    }
+    \coordinate (hullcoord0) at (hullcoord\numberofnodes);
+    \pgfmathtruncatemacro\lastnumber{\numberofnodes+1}
+    \coordinate (hullcoord\lastnumber) at (hullcoord1);
+  },
+  create hullcoords
+  ]
+  ($(hullcoord1)!#2!-90:(hullcoord0)$)
+  \foreach [
+  evaluate=\currentnode as \previousnode using \currentnode-1,
+  evaluate=\currentnode as \nextnode using \currentnode+1
+  ] \currentnode in {1,...,\numberofnodes} {
+    let \p1 = ($(hullcoord\currentnode) - (hullcoord\previousnode)$),
+    \n1 = {atan2(\y1,\x1) + 90},
+    \p2 = ($(hullcoord\nextnode) - (hullcoord\currentnode)$),
+    \n2 = {atan2(\y2,\x2) + 90},
+    \n{delta} = {Mod(\n2-\n1,360) - 360}
+    in 
+    {arc [start angle=\n1, delta angle=\n{delta}, radius=#2]}
+    -- ($(hullcoord\nextnode)!#2!-90:(hullcoord\currentnode)$) 
+  }
+}
 
 \begin{document}
 \tikzstyle{every picture}+=[remember picture]
 \everymath{\displaystyle}
 
 \maketitle
+
+\begin{frame} % WTF are networks
+   \centering
+   \begin{tikzpicture}[auto,
+         sp/.style={draw, very thick, minimum size=1.3cm, color=plFg, circle, inner sep=1pt, outer sep=0pt, fill=plBg},
+         ssp/.style={draw, very thick, minimum size=1.0cm, color=plYellow, circle, inner sep=1pt, outer sep=0pt, fill=plBg},
+         int/.style={draw, shorten >= 2pt, shorten <= 2pt, ->, >=latex', thick},
+         sint/.style={draw, shorten >= 2pt, shorten <= 2pt, ->, >=latex', thick}
+      ]
+      \node[sp] at (0,0) (trex) {\includegraphics[width=1.2cm]{images/trex.png}};
+      \node[sp, below=0.8cm of trex] (wolf) {\includegraphics[width=0.8cm]{images/wolf.png}};
+      \node[sp, below=0.8cm of wolf] (deer) {\includegraphics[width=0.8cm]{images/deer.png}};
+      \node[sp, below right=0.8cm and 0.8cm of deer] (fern) {\includegraphics[width=0.8cm]{images/fern.png}};
+      \node[sp, above right=0.8cm and 0.8cm of fern] (apis) {\includegraphics[width=0.8cm]{images/apis.png}};
+      \node[sp, above=0.8cm of apis] (wasp) {\includegraphics[width=0.8cm]{images/wasp.png}};
+
+      \draw[int] (trex) -- (wolf);
+      \draw[int] (wolf) -- (deer);
+      \draw[int, color=plGreen] (deer) -- (fern);
+      \draw[int, <->, color=plMagenta] (fern) -- (apis);
+      \draw[int, color=plBlue] (wasp) -- (apis);
+
+      \uncover<2->{
+      \node[ssp, color=plCyan, fill=plBg, below right=1pt and 3.3cm of apis] (a1) {\includegraphics[width=0.6cm]{images/apis.png}};
+      \node[ssp, color=plCyan, fill=plBg, right=0.8cm of a1] (a2) {\includegraphics[width=0.6cm]{images/apis.png}};
+      \node[ssp, color=plCyan, fill=plBg, right=0.8cm of a2] (a3) {\includegraphics[width=0.6cm]{images/apis.png}};
+      \node[ssp, color=plCyan, fill=plBg, right=0.8cm of a3] (a4) {\includegraphics[width=0.6cm]{images/apis.png}};
+      
+      \node[ssp, above right=1pt and 3.3cm of wasp] (w1) {\includegraphics[width=0.6cm]{images/wasp.png}};
+      \node[ssp, right=0.8cm of w1] (w2) {\includegraphics[width=0.6cm]{images/wasp.png}};
+      \node[ssp, right=0.8cm of w2] (w3) {\includegraphics[width=0.6cm]{images/wasp.png}};
+      \node[ssp, right=0.8cm of w3] (w4) {\includegraphics[width=0.6cm]{images/wasp.png}};
+
+      \draw[sint] (w1) -- (a1);
+      \draw[sint] (w1) -- (a2);
+      \draw[sint] (w1) -- (a4);
+      \draw[sint] (w2) -- (a2);
+      \draw[sint] (w2) -- (a3);
+      \draw[sint] (w3) -- (a4);
+      \draw[sint] (w4) -- (a4);
+   
+      \begin{pgfonlayer}{background}
+         \uncover<2>{\draw[fill=plFg!30!plBg,draw=none] \convexpath{wasp, w1, w4, a4, a1, apis}{0.8cm};}
+      \end{pgfonlayer}
+
+      }
+
+
+   \end{tikzpicture}
+\end{frame}
 
 \begin{frame} % Question
    \centering
@@ -398,6 +474,20 @@
          \addplot[only marks, mark size=0.9, plYellow] table [x index=1, y index=3]{./data/post_phag.dat}; \addlegendentry{phage};
       \end{axis}
    \end{tikzpicture}
+\end{frame}
+
+\begin{frame}[t]{title}
+   
+\end{frame}
+
+\begin{frame}[b] % Credits
+   \small
+   \textbf{Image credits:} Maija Karala, Olegivvit, Tracy A. Heath, Adrian Reich, George Starr, Gareth Monger\\
+   \texttt{http://creativecommons.org/licenses/by/3.0/}\vskip 1em
+   \textbf{Made with:} \LaTeX, pgfplots, tikz\vskip 1em
+   \textbf{License:} Creative Commons 4.0 "by" to Timoth\'ee Poisot\\
+   \texttt{http://creativecommons.org/licenses/by/4.0/}
+   \vskip 1em
 \end{frame}
 
 \end{document}

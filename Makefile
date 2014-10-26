@@ -5,7 +5,7 @@ LOPT= -shell-escape
 
 .PHONY: clean
 
-all: $(SLIDES) data
+all: data $(SLIDES)
 
 data: data/post.dat
 	grep "disp" $< > data/post_disp.dat
