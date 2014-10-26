@@ -481,18 +481,27 @@
    \end{tikzpicture}
 \end{frame}
 
-\begin{frame}[t]{title}
-   
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{bg}}
+
+\begin{frame}[b] % Conclusion
+   \begin{beamercolorbox}[left, leftskip=.1\textwidth]{credits}
+      \bfseries%
+      network structure is predicted by\\\alert{simple evolutionary rules} \vskip 1em
+      types of networks differ on their\\\alert{tendency to retain interactions}
+   \end{beamercolorbox}
+   \vskip .1\textwidth
 \end{frame}
 
 \begin{frame}[b] % Credits
-   \small
-   \textbf{Image credits:} Maija Karala, Olegivvit, Tracy A. Heath, Adrian Reich, George Starr, Gareth Monger\\
-   \texttt{http://creativecommons.org/licenses/by/3.0/}\vskip 1em
-   \textbf{Made with:} \LaTeX, pgfplots, tikz\vskip 1em
-   \textbf{License:} Creative Commons 4.0 "by" to Timoth\'ee Poisot\\
-   \texttt{http://creativecommons.org/licenses/by/4.0/}
-   \vskip 1em
+   \begin{beamercolorbox}[left, leftskip=.1\textwidth]{credits}
+      \tiny
+      \textbf{Image credits:} Maija Karala, Olegivvit, Tracy A. Heath, Adrian Reich, George Starr, Gareth Monger\\
+      \texttt{http://creativecommons.org/licenses/by/3.0/}\vskip 1em
+      \textbf{Made with:} \LaTeX, pgfplots, tikz, a baby mashing on the keyboard\vskip 1em
+      \textbf{License:} Creative Commons 4.0 "by" to Timoth\'ee Poisot\\
+      \texttt{http://creativecommons.org/licenses/by/4.0/}
+   \end{beamercolorbox}
+   \vskip .1\textwidth
 \end{frame}
 
 \end{document}
