@@ -41,6 +41,12 @@
   }
 }
 
+% Jumpy graphs
+\def\galign{%
+   \pgfresetboundingbox%
+   \path (current axis.south west) rectangle (current axis.north east);%
+}
+
 \begin{document}
 \tikzstyle{every picture}+=[remember picture]
 \everymath{\displaystyle}
@@ -301,7 +307,7 @@
             xmin=0.00095, xmax=1,
             xlabel = Probability of losing new interactions,
             xlabel style={yshift=-1em},
-            ylabel style={xshift=-1em},
+            ylabel style={yshift=2em},
             axis y line*=left, axis x line*=bottom,
             x axis line style={draw opacity=0.0},
             y axis line style={draw opacity=0.0},
@@ -398,7 +404,81 @@
   }
 \end{frame}
 
-\begin{frame} % Example with one network
+\begin{frame} % Example with one network (posteriors for p)
+   \centering
+   \begin{tikzpicture}[trim axis left, trim axis right]
+      \begin{axis}[
+            tick align=outside,
+            ycomb,
+            xlabel = Probability of top-level speciation,
+            ylabel = Density,
+            xlabel style={yshift=-1em},
+            ylabel style={yshift=2em},
+            ymin=0, ymax=3,
+            xmin=0, xmax=1,
+            axis y line*=left, axis x line*=bottom,
+            x axis line style={draw opacity=0.0},
+            y axis line style={draw opacity=0.0},
+            axis background/.style={shade,top color=plFg!20, bottom color=plBg, fill opacity=0.1},
+            width=8cm, height=8cm
+         ]
+         \addplot[plMagenta, line width=8pt] table [x=px, y=py] {./data/hist.dat};
+      \end{axis}
+      \galign
+   \end{tikzpicture}
+\end{frame}
+
+\begin{frame} % Example with one network (posteriors for e)
+   \centering
+   \begin{tikzpicture}[trim axis left, trim axis right]
+      \begin{axis}[
+            tick align=outside,
+            ycomb,
+            xmode = log,
+            xlabel = Probability of losing new interactions,
+            ylabel = Density,
+            xlabel style={yshift=-1em},
+            ylabel style={yshift=2em},
+            ymin=0, ymax=3,
+            xmin=0.001, xmax=1,
+            axis y line*=left, axis x line*=bottom,
+            x axis line style={draw opacity=0.0},
+            y axis line style={draw opacity=0.0},
+            axis background/.style={shade,top color=plFg!20, bottom color=plBg, fill opacity=0.1},
+            width=8cm, height=8cm
+         ]
+         \addplot[plGreen, line width=8pt] table [x=ex, y=ey] {./data/hist.dat};
+      \end{axis}
+      \galign
+   \end{tikzpicture}
+\end{frame}
+
+\begin{frame} % Example with one network (posteriors for c)
+   \centering
+   \begin{tikzpicture}[trim axis left, trim axis right]
+      \begin{axis}[
+            tick align=outside,
+            ycomb,
+            xmode = log,
+            xlabel = Tendency for specialization,
+            ylabel = Density,
+            xlabel style={yshift=-1em},
+            ylabel style={yshift=2em},
+            ymin=0, ymax=3,
+            xmin=0.1, xmax=10,
+            axis y line*=left, axis x line*=bottom,
+            x axis line style={draw opacity=0.0},
+            y axis line style={draw opacity=0.0},
+            axis background/.style={shade,top color=plFg!20, bottom color=plBg, fill opacity=0.1},
+            width=8cm, height=8cm
+         ]
+         \addplot[plCyan, line width=8pt] table [x=cx, y=cy] {./data/hist.dat};
+      \end{axis}
+      \galign
+   \end{tikzpicture}
+\end{frame}
+
+\begin{frame} % Example with one network (parameters)
    \centering
    \begin{tikzpicture}[trim axis left, trim axis right]
       \begin{axis}[
@@ -407,7 +487,7 @@
             xlabel = Probability of losing new interactions,
             ylabel = Tendency for specialization,
             xlabel style={yshift=-1em},
-            ylabel style={yshift=1em},
+            ylabel style={yshift=2em},
             ymin=0.1, ymax=10,
             xmin=0.001, xmax=1,
             axis y line*=left, axis x line*=bottom,
@@ -416,8 +496,9 @@
             axis background/.style={shade,top color=plFg!20, bottom color=plBg, fill opacity=0.1},
             width=8cm, height=8cm
          ]
-         \addplot[only marks, mark size=0.4, plBlue] table [x=e, y=c]{./data/disp1.dat};
+         \addplot[only marks, plYellow, mark size=0.3] table [x=e, y=c] {./data/single.dat};
       \end{axis}
+      \galign
    \end{tikzpicture}
 \end{frame}
 
@@ -430,7 +511,7 @@
             xlabel = Probability of losing new interactions,
             ylabel = Tendency for specialization,
             xlabel style={yshift=-1em},
-            ylabel style={yshift=1em},
+            ylabel style={yshift=2em},
             ymin=0.1, ymax=10,
             xmin=0.001, xmax=1,
             axis y line*=left, axis x line*=bottom,
@@ -448,6 +529,7 @@
          \addplot[only marks, mark size=0.9, plMagenta] table [x index=1, y index=3]{./data/post_para.dat}; \addlegendentry{parasitism};
          \addplot[only marks, mark size=0.9, plYellow] table [x index=1, y index=3]{./data/post_phag.dat}; \addlegendentry{phage};
       \end{axis}
+      \galign
    \end{tikzpicture}
 \end{frame}
 
@@ -460,7 +542,7 @@
             xlabel = Probability of losing new interactions,
             ylabel = Tendency for specialization,
             xlabel style={yshift=-1em},
-            ylabel style={yshift=1em},
+            ylabel style={yshift=2em},
             ymin=1.0, ymax=10,
             xmin=0.01, xmax=1,
             axis y line*=left, axis x line*=bottom,
@@ -478,6 +560,37 @@
          \addplot[only marks, mark size=0.9, plMagenta] table [x index=1, y index=3]{./data/post_para.dat}; \addlegendentry{parasitism};
          \addplot[only marks, mark size=0.9, plYellow] table [x index=1, y index=3]{./data/post_phag.dat}; \addlegendentry{phage};
       \end{axis}
+      \galign
+   \end{tikzpicture}
+\end{frame}
+
+\begin{frame} % All networks (scores)
+   \centering
+   \begin{tikzpicture}[trim axis left, trim axis right]
+      \begin{axis}[
+            tick align=outside,
+            xlabel = Model performance (z-score),
+            ylabel = {},
+            xlabel style={yshift=-1em},
+            ylabel style={yshift=2em},
+            ymin=0, ymax=1.0,
+            xmin=-3, xmax=3,
+            axis y line*=left, axis x line*=bottom,
+            x axis line style={draw opacity=0.0},
+            y axis line style={draw opacity=0.0},
+            axis background/.style={shade,top color=plFg!20, bottom color=plBg, fill opacity=0.1},
+            width=8cm, height=8cm,
+            legend pos=north east,
+            legend cell align=left,
+            legend style={fill=none, font=\small, draw=none}
+         ]
+         \addplot[no marks, thick, plGreen] table [x = x, y = herbi]{./data/scores.dat}; \addlegendentry{herbivory};
+         \addplot[no marks, thick, plBlue] table [x = x, y = polli]{./data/scores.dat}; \addlegendentry{pollination};
+         \addplot[no marks, thick, plRed] table [x = x, y = dispe]{./data/scores.dat}; \addlegendentry{dispersal};
+         \addplot[no marks, thick, plMagenta] table [x = x, y = paras]{./data/scores.dat}; \addlegendentry{parasitism};
+         \addplot[no marks, thick, plYellow] table [x = x, y = phage]{./data/scores.dat}; \addlegendentry{phage};
+      \end{axis}
+      \galign
    \end{tikzpicture}
 \end{frame}
 
@@ -486,8 +599,8 @@
 \begin{frame}[b] % Conclusion
    \begin{beamercolorbox}[left, leftskip=.1\textwidth]{credits}
       \bfseries%
-      network structure is predicted by\\\alert{simple evolutionary rules} \vskip 1em
-      types of networks differ on their\\\alert{tendency to retain interactions}
+      network structure is predicted by\\ {\color{plYellow}simple evolutionary rules} \vskip 1em
+      types of networks differ on their\\ {\color{plCyan}tendency to retain interactions}
    \end{beamercolorbox}
    \vskip .1\textwidth
 \end{frame}
@@ -497,8 +610,8 @@
       \tiny
       \textbf{Image credits:} Maija Karala, Olegivvit, Tracy A. Heath, Adrian Reich, George Starr, Gareth Monger\\
       \texttt{http://creativecommons.org/licenses/by/3.0/}\vskip 1em
-      \textbf{Made with:} \LaTeX, pgfplots, tikz, a baby mashing on the keyboard\vskip 1em
-      \textbf{License:} Creative Commons 4.0 "by" to Timoth\'ee Poisot\\
+      \textbf{Made with:} \LaTeX, pgfplots, tikz, a baby bashing on the keyboard\vskip 1em
+      \textbf{License:} Creative Commons 4.0 (Attribution) to Timoth\'ee Poisot\\
       \texttt{http://creativecommons.org/licenses/by/4.0/}
    \end{beamercolorbox}
    \vskip .1\textwidth
