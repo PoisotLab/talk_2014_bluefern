@@ -1,4 +1,4 @@
-PRES=bf14
+PRES=macroevo
 SLIDES=slides_$(PRES).pdf
 LENGINE=pdflatex
 LOPT= -shell-escape
