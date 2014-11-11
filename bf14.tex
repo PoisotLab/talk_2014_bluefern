@@ -54,6 +54,21 @@
 \begingroup
 \usebackgroundtemplate{\includegraphics[width=\paperwidth]{bg}}
 \maketitle
+
+\begin{frame}[b] % Open Science
+   \begin{beamercolorbox}[left, leftskip=.1\textwidth]{credits}
+      \small
+      \textbf{Twitter:} \texttt{@tpoi} \texttt{@PoisotLab}
+      \vskip 1em
+      \textbf{Email:} \texttt{tim@poisotlab.io}
+      \vskip 1em
+      \textbf{You can:} \alert{reproduce}, \alert{reuse}, \alert{remix}, \alert{share} this material\\
+      as long as you give \alert{attribution}\\
+      \texttt{http://dx.doi.org/10.6084/m9.figshare.1217578}
+   \end{beamercolorbox}
+   \vskip .1\textwidth
+\end{frame}
+
 \endgroup
 
 \begin{frame} % WTF are networks
@@ -402,6 +417,16 @@
   \scalebox{2}{
      $f(\theta) = \mathbf{s}_{\text{sim.}} \hskip 1em \approx \hskip 1em \mathbf{s}_{\text{obs.}}$
   }
+\end{frame}
+
+\begin{frame} % ABC in more details
+   \begin{itemize}[<+->]
+      \item draw parameter set $\theta$ from the \alert{prior}
+      \item simulate network
+      \item compute $\mathbf{s}_{\text{sim.}}$
+      \item measure distance $d_\theta$ between $\mathbf{s}_{\text{sim.}}$ and $\mathbf{s}_{\text{obs.}}$
+      \item is $d_\theta$ small? Yeah, we have the \alert{posterior}!
+   \end{itemize}
 \end{frame}
 
 \begin{frame} % Example with one network (posteriors for p)
